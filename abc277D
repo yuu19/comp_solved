@@ -1,0 +1,29 @@
+N, M = map(int, input().split())
+A = list(map(int, input().split()))
+A.sort()
+ans = 0
+for x in A:
+  ans += x
+
+concat = False
+if A[N-1] == M-1 and A[0] == 0:
+  concat = True
+
+tmp = A[0]
+nums = []
+for i in range(1, N):
+  if A[i] == A[i-1] or A[i] == A[i-1] + 1:
+    tmp += A[i]
+  else:
+    nums.append(tmp)
+    tmp = A[i]
+
+nums.append(tmp)
+if concat == True and len(nums) >= 2:
+  nums[0] += nums[len(nums)-1]
+  nums = nums[0:len(nums)]
+
+nums.sort(reverse=True)
+ans -= nums[0]
+print(ans)
+  
